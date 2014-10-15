@@ -32,6 +32,8 @@ sealed trait Mcq {
   def question: String
 
   def isCorrect(answer: String): Boolean
+
+  def solution: String
 }
 
 case class KanjiReadingMcq(kanjiInfo: KanjiInformation, wrongAnswers: Seq[String]) extends Mcq {
@@ -42,6 +44,8 @@ case class KanjiReadingMcq(kanjiInfo: KanjiInformation, wrongAnswers: Seq[String
   def question = kanjiInfo.kanji.toString
 
   def isCorrect(answer: String) =  kanjiInfo.readings.contains(answer)
+
+  def solution = kanjiInfo.toString
 }
 
 case class WordReadingMcq(word: Word, wrongAnswers: Seq[String]) extends Mcq {
@@ -50,6 +54,8 @@ case class WordReadingMcq(word: Word, wrongAnswers: Seq[String]) extends Mcq {
   def question = word.writing
 
   def isCorrect(answer: String) = answer == word.reading
+
+  def solution = word.toString
 }
 
 case class Quiz(questions: Seq[Mcq])
